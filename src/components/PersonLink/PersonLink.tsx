@@ -1,30 +1,30 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { Person } from '../../types/Person';
 
-type Person = {
-  name: string;
-  sex: string;
-  slug: string;
-};
+interface Props {
+  name: string | null;
+  foundPerson?: Person;
+}
 
-type Props = {
-  person?: Person;
-  fallbackName?: string;
-};
-
-export const PersonLink: React.FC<Props> = ({ person, fallbackName }) => {
-  if (!person) {
-    return <span>{fallbackName}</span>;
+export const PersonLink: React.FC<Props> = ({ name, foundPerson }) => {
+  if (!name) {
+    return <>-</>;
   }
 
-  return (
-    <Link
-      to={`/people/${person.slug}`}
-      className={classNames({
-        'has-text-danger': person.sex === 'f',
-      })}
-    >
-      {person.name}
-    </Link>
-  );
+  if (foundPerson) {
+    return (
+      <Link
+        to={`/people/${foundPerson.slug}`}
+        className={classNames({
+          'has-text-danger': foundPerson.sex === 'f',
+        })}
+      >
+        {name}
+      </Link>
+    );
+  }
+
+  return <span>{name}</span>;
 };
