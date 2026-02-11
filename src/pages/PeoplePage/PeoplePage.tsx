@@ -31,6 +31,7 @@ export const PeoplePage: React.FC = () => {
             father: data.find(per => per.name === person.fatherName),
           }));
 
+          setHasError(false);
           setPeople(peopleWithParents);
         })
         .catch(() => {
