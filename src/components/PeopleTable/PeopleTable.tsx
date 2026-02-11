@@ -35,7 +35,7 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
             })}
           >
             <td>
-              <PersonLink name={person.name} foundPerson={person} />
+              <PersonLink person={person} />
             </td>
 
             <td>{person.sex}</td>
@@ -44,15 +44,15 @@ export const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
 
             <td>
               <PersonLink
-                name={person.motherName}
-                foundPerson={person.mother}
+                person={person.mother}
+                foundPerson={person.motherName}
               />
             </td>
 
             <td>
               <PersonLink
-                name={person.fatherName}
-                foundPerson={person.father}
+                person={person.father}
+                foundPerson={person.fatherName}
               />
             </td>
           </tr>

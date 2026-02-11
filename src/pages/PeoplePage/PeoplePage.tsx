@@ -15,8 +15,8 @@ export const PeoplePage: React.FC = () => {
     setIsLoading(true);
     setHasError(false);
 
-    setTimeout(() => {
-      fetch('api/people.json')
+    const timer = setTimeout(() => {
+      fetch('https://mate-academy.github.io/react_people-table/api/people.json')
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to load people');
@@ -27,8 +27,8 @@ export const PeoplePage: React.FC = () => {
         .then((data: Person[]) => {
           const peopleWithParents = data.map(person => ({
             ...person,
-            mother: data.find(p => p.name === person.motherName),
-            father: data.find(p => p.name === person.fatherName),
+            mother: data.find(per => per.name === person.motherName),
+            father: data.find(per => per.name === person.fatherName),
           }));
 
           setPeople(peopleWithParents);
@@ -39,7 +39,9 @@ export const PeoplePage: React.FC = () => {
         .finally(() => {
           setIsLoading(false);
         });
-    }, 1000);
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (

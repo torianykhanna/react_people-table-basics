@@ -4,27 +4,27 @@ import classNames from 'classnames';
 import { Person } from '../../types/Person';
 
 interface Props {
-  name: string | null;
-  foundPerson?: Person;
+  person?: Person | null;
+  foundPerson?: string | null;
 }
 
-export const PersonLink: React.FC<Props> = ({ name, foundPerson }) => {
-  if (!name) {
-    return <>-</>;
+export const PersonLink: React.FC<Props> = ({ person, foundPerson }) => {
+  if (!person && !foundPerson) {
+    return <span>-</span>;
   }
 
-  if (foundPerson) {
-    return (
-      <Link
-        to={`/people/${foundPerson.slug}`}
-        className={classNames({
-          'has-text-danger': foundPerson.sex === 'f',
-        })}
-      >
-        {name}
-      </Link>
-    );
+  if (!person) {
+    return <>{foundPerson}</>;
   }
 
-  return <span>{name}</span>;
+  return (
+    <Link
+      to={`/people/${person.slug}`}
+      className={classNames({
+        'has-text-danger': person.sex === 'f',
+      })}
+    >
+      {person.name}
+    </Link>
+  );
 };
