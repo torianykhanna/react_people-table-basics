@@ -14,7 +14,7 @@ export const PersonLink: React.FC<Props> = ({ person, foundPerson }) => {
   }
 
   if (!person) {
-    return <>{foundPerson}</>;
+    return <span>{foundPerson}</span>;
   }
 
   return (
